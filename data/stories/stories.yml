@@ -1,0 +1,113 @@
+version: "2.0"
+
+stories:
+
+- story: show terms and conditions when clicking banking_info after utter_greet
+  steps:
+  - action: utter_greet
+  - intent: banking_info
+  - action: utter_terms_conditions
+
+- story: show banking options when user affirms after utter_terms_conditions
+  steps:
+  - action: utter_terms_conditions
+  - intent: affirm
+  - action: utter_banking_option
+  - intent: account_info
+  - action: utter_ask_identity
+  - intent: affirm
+  - action: phone_number_form
+  - active_loop: phone_number_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: otp_number_form
+  - active_loop: otp_number_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  
+- story: show utter_stay_happy when user denies after utter_terms_conditions
+  steps:
+  - action: utter_terms_conditions
+  - intent: deny
+  - action: utter_stay_happy
+
+- story: show general info link after clicking general_info
+  steps:
+  - action: utter_greet
+  - intent: general_info
+  - action: utter_general_info_link
+
+- story: show utter_stay_happy when user affirms after utter_general_info_link
+  steps:
+  - action: utter_general_info_link
+  - intent: affirm
+  - action: utter_stay_happy
+
+- story: show utter_stay_happy when user denies after utter_general_info_link
+  steps:
+  - action: utter_general_info_link
+  - intent: deny
+  - action: utter_stay_happy
+
+- story: show faq into link after clicking faq_info
+  steps:
+  - action: utter_greet
+  - intent: faq_info
+  - action: utter_faq_info_link
+
+- story: show utter_stay_happy when user affirms after utter_faq_info_link
+  steps:
+  - action: utter_faq_info_link
+  - intent: affirm
+  - action: utter_stay_happy
+
+- story: show utter_stay_happy when user denies after utter_faq_info_link
+  steps:
+  - action: utter_faq_info_link
+  - intent: deny
+  - action: utter_stay_happy
+
+- story: show utter_stay_happy when clicking terms_info after utter_greet
+  steps:
+  - action: utter_greet
+  - intent: terms_conditions
+  - action: utter_terms_conditions
+  - intent: affirm
+  - action: utter_stay_happy
+
+
+- story: show utter_stay_happy when clicking terms_info after utter_greet
+  steps:
+  - action: utter_greet
+  - intent: terms_conditions
+  - action: utter_terms_conditions
+  - intent: deny
+  - action: utter_stay_happy
+
+- story: say ok when user affirms after utter_help
+  steps:
+  - action: utter_help
+  - intent: affirm
+  - action: utter_ok
+
+- story: say ok when user affirms after action_show_balance
+  steps:
+  - action: action_show_balance
+  - intent: affirm
+  - action: utter_ok
+
+- story: say ok when user affirms after action_show_recipients
+  steps:
+  - action: action_show_recipients
+  - intent: affirm
+  - action: utter_ok
+  
+- story: say ok when user affirms after action_show_transfer_charge
+  steps:
+  - action: action_show_transfer_charge
+  - intent: affirm
+  - action: utter_ok
